@@ -1,4 +1,4 @@
-# Respositorio para la asignatura Infraestructura Virtual UGR (22/23)
+# Repositorio para la asignatura Infraestructura Virtual UGR (22/23)
 
 ## Problemas a resolver
 En muchas ocasiones hemos llegado a final de mes, con más gastos del que teníamos planeado y sin saber a donde se nos ha ido el dinero, o salir con amigos y no saber quien ha pagado en cada sitio.
