@@ -1,14 +1,12 @@
 # Repositorio para la asignatura Infraestructura Virtual UGR (22/23)
 
 ## Problemas a resolver
-En muchas ocasiones hemos llegado a final de mes, con más gastos del que teníamos planeado y sin saber a donde se nos ha ido el dinero, o salir con amigos y no saber quien ha pagado en cada sitio.
-
-Con este proyecto crearemos una aplicación para obtener un control sobre como gastamos el dinero, dividir los gastos en conjunto entre amigos, compañeros de piso o parejas y poder realizar una previsión de gastos tomando como referencia otros meses anteriores.
+En ocasiones hemos estado con un grupo de amigos, ya sea en viajes o saliendo por tu ciudad, sin llevar las cuentas y al final del día no sabeis quien ha pagado cada cosa ni para quienes, y en caso de saberlo suele ser un lío ajustar cuanto le paga cada uno al resto del grupo (sobretodo en grupos grandes).
 
 ## Lógica de negocio
-A partir de los datos recibidos se podrán crear previsiones de gastos, desglosar los gastos por categorías y llevar las cuentas en común entre varias personas.
+Crearemos una aplicación para obtener un ajuste de cuentas entre los amigos, desglosando quien ha pagado cada cosa y entre quienes se divide el gasto ,facilitando un historial, además minimizando el número de pagos en el grupo.
 
 ## ¿Por qué en la nube?
-Esto posibilita tener un backup de tus gastos en la nube, a la vez que poder realizar gestiones desde diferentes dispositivos. Otra característica que aporta es que los gastos entre amigos podrán ser gestionados entre diferentes usuarios.
+Esto posibilita tener un backup de los gastos en la nube, a la vez que poder realizar gestiones desde diferentes dispositivos. Otra característica que aporta es que los gastos entre amigos podrán ser gestionados entre diferentes usuarios.
 
 ## [Configuración del respositorio](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/readme.md)
