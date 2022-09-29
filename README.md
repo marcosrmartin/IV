@@ -9,4 +9,7 @@ Crearemos una aplicación para obtener un ajuste de cuentas entre los amigos, de
 ## ¿Por qué en la nube?
 Esto posibilita tener un backup de los gastos en la nube, a la vez que poder realizar gestiones desde diferentes dispositivos. Otra característica que aporta es que los gastos entre amigos podrán ser gestionados entre diferentes usuarios.
 
+## Planificación
+Hemos planificado [2 milestones (estructura y API)](https://github.com/marcosrmartin/PerroAndaluz/milestones) los cuales describen unos productos mínimamente viables, y [4 historias de usuarios](https://github.com/marcosrmartin/PerroAndaluz/issues) los cuales expresan funcionalidades que al cliente le gustaría obtener.
+
 ## [Configuración del respositorio](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/readme.md)
