@@ -10,16 +10,19 @@ Crearemos una aplicación para obtener un ajuste de cuentas entre los amigos, de
 Esto posibilita tener un backup de los gastos en la nube, a la vez que poder realizar gestiones desde diferentes dispositivos. Otra característica que aporta es que los gastos entre amigos podrán ser gestionados entre diferentes usuarios.
 
 ## Planificación
-Hemos planificado [2 milestones (estructura y API)](https://github.com/marcosrmartin/PerroAndaluz/milestones) los cuales describen unos productos mínimamente viables, y [4 historias de usuarios](https://github.com/marcosrmartin/PerroAndaluz/issues) los cuales expresan funcionalidades que al cliente le gustaría obtener.
+Hemos planificado [4 milestones (estructura y API)](https://github.com/marcosrmartin/PerroAndaluz/milestones) los cuales describen unos productos mínimamente viables, y [2 historias de usuarios](https://github.com/marcosrmartin/PerroAndaluz/issues) los cuales expresan funcionalidades que al cliente le gustaría obtener.
 
 ### Milestones
 #### [M-0] Estructura de datos para gestionar las cuentas de cada usuario
-Módulo definido en un lenguaje y que el mismo compile sin problemas.
+Definición de un módulo que permita guardar los datos relacionados con las listas y que el mismo compile sin problemas.
 
-#### [M-1] Funcionalidad módulo para la gestión de usuarios
-Implementar en el módulo anterior, las funcionalidades necesarias para la lógica de negocio.
+#### [M-1] Funcionalidad módulo para la gestión de usuarios estáticos
+Implementar en el módulo anterior, la funcionalidad para la distribución de gastos entre participantes estáticos.
 
-#### [M-2] Definición e implementación de una API REST
+#### [M-2] Funcionalidad módulo para la gestión de usuarios dinámicos
+Implementar la funcionalidad de añadir usuarios a listas y pagos ya creados.
+
+#### [M-3] Definición e implementación de una API REST
 
 ### Historias de usuarios
 #### [HU-01] Aplicación para gestionar las cuentas
