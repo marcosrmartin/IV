@@ -1,5 +1,8 @@
-//  Clase Usuario, los cuales van a participar en un evento y van a tener una serie de Gastos y Deudas.
-import Evento from "./Evento";
+
+/**
+ * Clase Usuario, se va a implementar en un inicio como un objeto-valor ya que el usuario una vez creado 
+ * permanecerá inmutable hasta que lo queramos eliminar y será gestionado por la Entidad de Eventos
+ */
 class Usuario {
     /**
      * 

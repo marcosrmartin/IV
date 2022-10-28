@@ -1,5 +1,8 @@
-//  Clase de Gastos, que van a ir asociados a un Evento y Contienen a un usuario.
-
+/**
+ * Clase Pago, representa un pago que se realiza, basicamente va a almacenar el Usuario que realiza el Pago y la cantidad
+ * Comprobando que la Cantidad sea > 0, será un objeto-valor ya que permanece inmutable tras su creación y va a ser
+ * gestionado por la Entidad de Eventos
+ */
 import Usuario from './Usuario.js';
 class Pago{
     /**
