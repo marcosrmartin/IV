@@ -9,7 +9,15 @@ class Usuario {
      * @param {String} Nombre 
      */
     constructor(Nombre) {
-        this.Nombre = Nombre
+        try{
+            if (Nombre.length() > 0){
+                this.Nombre = Nombre;
+            }else{
+                throw new Error ("Nombre no puede ser vacío");
+            }
+        }catch(e){
+            console.log(e);
+        }
     }
 }
 module.exports.Usuario = Usuario;

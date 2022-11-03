@@ -17,7 +17,7 @@ class Pago{
                 this.Cantidad = Cantidad;
             }else{
                 this.Cantidad = 0;
-                throw "Cantidad no puede ser negativa";
+                throw new Error("Cantidad no puede ser negativa");
             }
             this.Usuario_paga = Usuario_paga;
         }catch(e){
