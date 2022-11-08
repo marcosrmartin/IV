@@ -13,4 +13,4 @@ function usuario() {
     return exec('node -c ./src/services/Usuario.js');
 }
 
-exports.syntaxCheck = parallel(usuario, pago, evento);
+exports.check = parallel(usuario, pago, evento);

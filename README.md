@@ -20,6 +20,6 @@ Esta se debe a que npm tiene npx y yarn no, y yarn es más rápido que npm, busc
 Para esta elección he comparado entre [gulp y grunt](https://www.keycdn.com/blog/gulp-vs-grunt) ([aqui también](https://deliciousbrains.com/grunt-vs-gulp-battle-build-tools/)), he seleccionado gulp ya que esta es un poco más eficiente que Grunt, es más flexible al tener más peso la programación y se escala mejor, aunque Grunt para un proyecto pequeño como este también cumple su función. He descartado yarn la cual soporta la gestión de tareas en el package.json al igual que npm porque puede ser un dolor de cabeza a la hora de escalar el código. Tanto gulp como grunt tienen soporte para usar yarn en vez de npm. Aunque utilizo npm para instalar yarn y este para instalar gulp al iniciar el servidor.
 
 ### Orden check
-Utilizamos una opción que nos ofrece el cli de node, el cual es node -c <ruta/archivo>, esta orden será lanzada por gulp a través de 3 subprocesos en paralelo, una para cada estructura de datos.
+Utilizamos una opción que nos ofrece el cli de node, el cual es node -c <ruta/archivo>, esta orden será lanzada por gulp a través de 3 subprocesos en paralelo, uno para cada estructura de datos.
 
 ## [Configuración del respositorio](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/readme.md)

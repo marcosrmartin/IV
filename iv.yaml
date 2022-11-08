@@ -5,4 +5,4 @@ entidad:
 
 automatizar:
   - fichero: gulpfile.js
-  - orden: yarn gulp syntaxCheck
+  - orden: yarn gulp check
