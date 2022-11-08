@@ -12,23 +12,14 @@ Esto posibilita tener un backup de los gastos en la nube, a la vez que poder rea
 ## Planificación
 Hemos planificado [4 milestones (estructura y API)](https://github.com/marcosrmartin/PerroAndaluz/milestones) los cuales describen unos productos mínimamente viables, y [2 historias de usuarios](https://github.com/marcosrmartin/PerroAndaluz/issues) los cuales expresan funcionalidades que al cliente le gustaría obtener.
 
-### Milestones
-#### [M-0] Estructura de datos para gestionar las cuentas de cada usuario
-Definición de un módulo que permita guardar los datos relacionados con las listas y que el mismo compile sin problemas.
+## Elección del gestor de dependencias
+Para esta decisión nos hemos basado en esta comparativa entre [npm, yarn, y npmp](https://nicco.io/blog/going-beyond-npm-meet-yarn-pnpm), con la que hemos descartado npmp ya que no está preparada para producción y es la que tiene menor comunidad, ahora la duda era entre npm y yarn. 
+Esta se debe a que npm tiene npx y yarn no, y yarn es más rápido que npm, buscando y gracias a [esta comparativa](https://www.codingninjas.com/codestudio/library/difference-between-npm-and-npx) entre npm y npx, y esta entre [yarn y npm](knowledgehut.com/blog/web-development/yarn-vs-npm), he descartado npm, ya que en nuestro proyecto no necesitaremos instalar muchos módulos desde npm y prefiero priorizar la velocidad de instalación de dependencias, además ambas tienen casi la misma sintaxis.
 
-#### [M-1] Funcionalidad módulo para la gestión de usuarios estáticos
-Implementar en el módulo anterior, la funcionalidad para la distribución de gastos entre participantes estáticos.
+## Elección del gestor de tareas
+Para esta elección he comparado entre [gulp y grunt](https://www.keycdn.com/blog/gulp-vs-grunt) ([aqui también](https://deliciousbrains.com/grunt-vs-gulp-battle-build-tools/)), he seleccionado gulp ya que esta es un poco más eficiente que Grunt, es más flexible al tener más peso la programación y se escala mejor, aunque Grunt para un proyecto pequeño como este también cumple su función. He descartado yarn la cual soporta la gestión de tareas en el package.json al igual que npm porque puede ser un dolor de cabeza a la hora de escalar el código. Tanto gulp como grunt tienen soporte para usar yarn en vez de npm. Aunque utilizo npm para instalar yarn y este para instalar gulp al iniciar el servidor.
 
-#### [M-2] Funcionalidad módulo para la gestión de usuarios dinámicos
-Implementar la funcionalidad de añadir usuarios a listas y pagos ya creados.
-
-#### [M-3] Definición e implementación de una API REST
-
-### Historias de usuarios
-#### [HU-01] Aplicación para gestionar las cuentas
-Como estudiante que vive en un piso compartido que realiza un par de compras a la semana, me gustaría tener una aplicación en la cual poder apuntar los gastos en común con mis compañeros de piso, pudiendo elegir quienes participan en cada pago, y que la aplicación calcule cuanto le debe cada uno al otro.
-
-#### [HU-02] Modificar usuarios en pago
-Hay veces que llega algún amigo tarde y no contábamos con él, me gustaría poder añadir gente a un pago o cuenta que no estaba en la creación de la misma.
+### Orden check
+Utilizamos una opción que nos ofrece el cli de node, el cual es node -c <ruta/archivo>, esta orden será lanzada por gulp a través de 3 subprocesos en paralelo, una para cada estructura de datos.
 
 ## [Configuración del respositorio](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/readme.md)

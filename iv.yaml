@@ -1,4 +1,8 @@
 lenguaje: node.js
 
 entidad:
-  - src/Evento.js
+  - app/src/Evento.js
+
+automatizar:
+  - fichero: gulpfile.js
+  - orden: yarn gulp syntaxCheck

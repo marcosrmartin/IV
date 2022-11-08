@@ -2,9 +2,9 @@
  * Clase Evento, esta clase es la principal, la que va a contener la lógica de negocio de la aplicación, 
  * Esta clase va a ser una Entidad que va a trabajar con los usuarios y con los pagos.
  */
-import Pago from './Pago.js';
-import Usuario from './Usuario.js';
-export class Evento {
+var Pago = require('Pago');
+var Usuario = require('Usuario');
+class Evento {
     /**
      * 
      * @param {String} Nombre // Nombre del Evento 

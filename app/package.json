@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "yarn": "^1.22.19"
+  },
+  "scripts": {
+    "start": "npm install yarn -g --save && yarn"
+  }
+}
