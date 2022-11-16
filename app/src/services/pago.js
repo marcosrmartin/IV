@@ -3,7 +3,7 @@
  * Comprobando que la Cantidad sea > 0, será un objeto-valor ya que permanece inmutable tras su creación y va a ser
  * gestionado por la Entidad de Eventos
  */
-var Usuario = require('Usuario');
+import Usuario from './usuario.js';
 class Pago{
     /**
      * 
