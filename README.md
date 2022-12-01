@@ -8,11 +8,3 @@ Crearemos una aplicación para obtener un ajuste de cuentas entre los amigos, de
 
 ## ¿Por qué en la nube?
 Esto posibilita tener un backup de los gastos en la nube, a la vez que poder realizar gestiones desde diferentes dispositivos. Otra característica que aporta es que los gastos entre amigos podrán ser gestionados entre diferentes usuarios.
-
-## Planificación
-Hemos planificado [4 milestones (estructura y API)](https://github.com/marcosrmartin/PerroAndaluz/milestones) los cuales describen unos productos mínimamente viables, y [2 historias de usuarios](https://github.com/marcosrmartin/PerroAndaluz/issues) los cuales expresan funcionalidades que al cliente le gustaría obtener.
-
-### yarn gulp check
-Utilizamos una opción que nos ofrece el cli de node, el cual es node -c <ruta/archivo>, esta orden será lanzada por gulp a través de 3 subprocesos en paralelo, uno para cada estructura de datos.
-
-## [Configuración del respositorio](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/readme.md)
