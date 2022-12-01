@@ -1,3 +1,5 @@
-app/.yarn*
-app/yarn.lock
-app/.pnp.cjs
+.yarn*
+yarn.lock
+.pnp*
+.gitignore
+.editorconfig

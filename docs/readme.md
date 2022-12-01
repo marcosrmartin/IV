@@ -49,29 +49,23 @@ Pnpm utiliza un [node_modulos basados en soft y hard links](https://pnpm.io/moti
 Yarn Berry elimina por completo el node_modulos y lo sustituye por un archivo .pnp.cjs, el cual contiene mapas, unos que apuntan a la localización en disco del paquete y otro que apunta a su lista de dependencias. Este archivo es más eficiente que la carpeta anidada creada por pnpm. Destacar que las dependencias [estarán en formato zip](https://yarnpkg.com/features/pnp#packages-are-stored-inside-zip-archives-how-can-i-access-their-files) ahorrando más espacio.
 En el caso de tener más de un proyecto con las mismas dependencias, Yarn las duplicaría al instalarla como sus predecesores, pero como tenemos un solo proyecto esto no nos afecta.
 
-Debido a todo lo anterior, utilizaremos Yarn Berry (PNP) para nuestro proyecto. 
+Debido a todo lo anterior, utilizaremos Yarn Berry (PNP) para nuestro proyecto (Este será instalado con -g para poder ser usado globalmente y no introduzca archivos que no van a ser necesarios en nuestro proyecto como node_modules y package-lock.json).
 
 
 ## Elección del gestor de tareas
 Nuestros criterios para elegir el gestor de tareas serán:
-- Facil de implementar.
-- Flexibilidad.
-- Paralelismo.
-- Rendimiento.
+1. Facil de implementar.
+2. No esté deprecated.
+3. Paralelismo.
 
 Tenemos los siguientes candidatos: **npm, yarn, make, grunt, gulp, broccoli**
 
 | Atributos | npm | yarn | make | grunt | gulp | broccoli |
 | --- | --- | --- | --- | --- | --- | --- |
-| Fácil de implementar* | ✔️ | ✔️ | ❌ | ✔️ | ✔️ | ❌ |
-| Flexibilidad | ❌ | ❌ | ✔️ | ✔️ | ✔️ | ✔️ |
+| Fácil de implementar* | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ |
+| Not deprecated | ✔️ | ✔️ | ✔️ | ✔️ | ❌ | ❌ |
 | Paralelismo | ✔️ | ✔️ | ✔️ | ✔️(plugin) |✔️ | ❌ |
 
-*Facilidad de crear tareas complejas, en el caso de broccoli no está de forma nativa en Yarn Berry, a la vez que hay escasa documentación y plugins de este. En cuanto a make sería ideal para ejecutar tareas que automaticen otro conjunto de tareas más pequeñas, pero al no contar con plugins, ni ser específico para NodeJS se vuelve una tarea más compleja.
+*Facilidad de implementar para este proyecto, en el cual no se necesitarán unas órdenes muy complejas, por lo que primaremos que la curva de aprendizaje sea mínima y que sea multiplataforma. Grunt y make no tienen una curva alta, pero aun así es mayor que la del script de yarn/npm.
 
-Una vez hecha la comparativa nos quedamos con Grunt y Gulp, ya que son las únicas que satisfacen los criterios anteriores.
-
-Para esta elección he comparado entre [gulp y grunt](https://www.keycdn.com/blog/gulp-vs-grunt) ([aqui también](https://deliciousbrains.com/grunt-vs-gulp-battle-build-tools/)), he seleccionado gulp ya que esta es más eficiente que Grunt gracias a los streams de Node, aunque Grunt para un proyecto pequeño como este también cumple su función.
-
-### Orden check
-Utilizamos una opción que nos ofrece el cli de node, el cual es node -c <ruta/archivo>, esta orden será lanzada por gulp a través de 3 subprocesos en paralelo, uno para cada estructura de datos.
+Nos quedan npm y yarn, así que nos quedaremos con yarn ya que es el gestor de dependencias que utilizamos (ya que no he encontrado comparativas de rendimiento de estos dos sobre scripts).

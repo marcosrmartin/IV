@@ -1,0 +1,10 @@
+{
+  "name": "app",
+  "packageManager": "yarn@3.3.0",
+  "scripts": {
+    "start": "npm install yarn -g --save && yarn set version berry && yarn",
+    "check": "node --check ./src/services/evento.js & ./src/services/pago.js & ./src/services/usuario.js"
+    
+  },
+  "type": "module"
+}
