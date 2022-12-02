@@ -4,5 +4,6 @@ entidad:
   - src/evento.js
 
 automatizar:
+  fichero: packaje.json
   orden: yarn run check
   
