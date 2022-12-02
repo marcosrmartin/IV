@@ -1,9 +1,8 @@
 lenguaje: node.js
 
 entidad:
-  - app/src/Evento.js
+  - src/evento.js
 
 automatizar:
-  fichero: gulpfile.js
-  orden: yarn gulp check
+  orden: yarn run check
   
