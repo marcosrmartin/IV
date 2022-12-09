@@ -1,4 +1,9 @@
 lenguaje: node.js
 
 entidad:
-  - app/src/evento.js
+  - src/evento.js
+
+automatizar:
+  fichero: package.json
+  orden: yarn run check
+  
