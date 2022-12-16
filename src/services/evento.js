@@ -12,11 +12,22 @@ export default class Evento {
      * @param {Arraylist(Pago)} Pagos // Lista De Pagos (Cada Pago contiene la cantidad y el usuario que la ha pagado)
      *  
      */
-    Constructor(Nombre, Participantes) {
+    constructor(Nombre, Participantes) {
         this.Nombre = Nombre;
         this.Participantes = Participantes;
         this.Pagos = [];
     }
 
+    addPago(pago){
+        return this.Pagos.push(pago)
+    }
+
+    gastoPorUsuario(){
+        let coste
+        this.Pagos.forEach(pago =>{
+            coste += pago.Cantidad
+        });
+        return coste/this.Participantes.lenght
+    }
 }
 

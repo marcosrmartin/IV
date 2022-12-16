@@ -10,7 +10,7 @@ export default class Usuario {
      */
     constructor(Nombre) {
         try{
-            if (Nombre.length() > 0){
+            if (Nombre.length > 0){
                 this.Nombre = Nombre;
             }else{
                 throw new Error ("Nombre no puede ser vacío");
