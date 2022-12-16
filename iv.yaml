@@ -5,7 +5,7 @@ entidad:
 
 automatizar:
   fichero: package.json
-  orden: yarn run check
+  orden: yarn run
   
 test: 
   - src/tests/evento.test.js
