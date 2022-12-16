@@ -15,4 +15,10 @@ Hemos planificado [4 milestones (estructura y API)](https://github.com/marcosrma
 ### yarn run check
 Utilizamos una opción que nos ofrece el cli de node, el cual es node -c o --check <ruta/archivo>, esta orden será lanzada a través de 3 subprocesos en paralelo, uno para cada estructura de datos.
 
+### Para lanzar los tests
+```
+yarn test
+```
+
+
 ## [Configuración del respositorio](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/readme.md)
