@@ -17,7 +17,7 @@ Utilizamos una opción que nos ofrece el cli de node, el cual es node -c o --che
 
 ### Para lanzar los tests
 ```
-yarn test
+yarn run test
 ```
 
 
