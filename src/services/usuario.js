@@ -3,7 +3,7 @@
  * Clase Usuario, se va a implementar en un inicio como un objeto-valor ya que el usuario una vez creado 
  * permanecerá inmutable hasta que lo queramos eliminar y será gestionado por la Entidad de Eventos
  */
-class Usuario {
+export default class Usuario {
     /**
      * 
      * @param {String} Nombre 
@@ -20,4 +20,3 @@ class Usuario {
         }
     }
 }
-module.exports.Usuario = Usuario;

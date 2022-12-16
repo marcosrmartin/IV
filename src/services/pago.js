@@ -4,7 +4,7 @@
  * gestionado por la Entidad de Eventos
  */
 import Usuario from './usuario.js';
-class Pago{
+export default class Pago{
     /**
      * 
      * @param {Float} Cantidad 
@@ -27,4 +27,3 @@ class Pago{
     }
     
 }
-module.exports.Pago = Pago;

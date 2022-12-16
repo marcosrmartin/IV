@@ -4,7 +4,7 @@
  */
 import Pago from './pago.js';
 import Usuario from './usuario.js';
-export class Evento {
+export default class Evento {
     /**
      * 
      * @param {String} Nombre // Nombre del Evento 
@@ -20,4 +20,3 @@ export class Evento {
 
 }
 
-module.exports.Evento = Evento;
