@@ -3,8 +3,11 @@
   "packageManager": "yarn@3.3.0",
   "scripts": {
     "setup": "npm install yarn -g --save && yarn set version berry && yarn",
-    "check": "node --check ./src/services/evento.js & ./src/services/pago.js & ./src/services/usuario.js"
-    
+    "check": "node --check ./src/services/evento.js & ./src/services/pago.js & ./src/services/usuario.js",
+    "test": "node --test"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0"
+  }
 }
