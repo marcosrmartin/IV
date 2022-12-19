@@ -90,4 +90,12 @@ Algunos ❌ lo soportan vía plugin, pero aun así están deprecated.
 2. Jest y vitest: Testing Framework + librería de aserciones.
 3. Mocha: solamente el testing framework.
 
-Nos quedamos con el test runner de Node, el cual viene por defecto y trae librería de aserciones, la cual nos valdrá en principio.
+Nos quedamos con el test runner de Node.
+
+## Elección de biblioteca de aserciones
+Para ello priorizaremos que siga siendo mantenida y la facilidad de implementación en el proyecto:
+Algunas las librerías: **chai.js, must.js, should.js, expect.js, assert de node.js**
+
+De las cuales solo chai.js sigue siendo mantenida a dia de hoy junto con la librería assert de Node.js que es nueva.
+
+Teniendo en cuenta que en principio no necesitamos ninguna funcionalidad que tenga chai y assert de Node no, nos quedaremos con esta última ya que viene por defecto.
