@@ -6,12 +6,12 @@
 export default class Usuario {
     /**
      * 
-     * @param {String} Nombre 
+     * @param {String} nombre 
      */
-    constructor(Nombre) {
+    constructor(nombre) {
         try{
-            if (Nombre.length > 0){
-                this.Nombre = Nombre;
+            if (nombre.length > 0){
+                this.nombre = nombre;
             }else{
                 throw new Error ("Nombre no puede ser vacío");
             }

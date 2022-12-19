@@ -7,19 +7,19 @@ import Usuario from './usuario.js';
 export default class Pago{
     /**
      * 
-     * @param {Float} Cantidad 
-     * @param {Usuario} Usuario_paga
+     * @param {Float} cantidad 
+     * @param {Usuario} usuarioPaga
      * @constructor Crea un Pago con comprobación de que el saldo introducido sea positivo. 
      */
-    constructor(Cantidad, Usuario_paga){
+    constructor(cantidad, usuarioPaga){
         try{
-            if (Cantidad > 0){
-                this.Cantidad = Cantidad;
+            if (cantidad > 0){
+                this.cantidad = cantidad;
             }else{
-                this.Cantidad = 0;
+                this.cantidad = 0;
                 throw new Error("Cantidad no puede ser negativa");
             }
-            this.Usuario_paga = Usuario_paga;
+            this.usuarioPaga = usuario_paga;
         }catch(e){
             console.log(e);
         }

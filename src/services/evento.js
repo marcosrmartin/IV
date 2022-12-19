@@ -7,19 +7,19 @@ import Usuario from './usuario.js';
 export default class Evento {
     /**
      * 
-     * @param {String} Nombre // Nombre del Evento 
-     * @param {Arraylist(Usuario)} Participantes // Participantes que hay en un Pago
-     * @param {Arraylist(Pago)} Pagos // Lista De Pagos (Cada Pago contiene la cantidad y el usuario que la ha pagado)
+     * @param {String} nombre // Nombre del Evento 
+     * @param {Arraylist(Usuario)} participantes // Participantes que hay en un Pago
+     * @param {Arraylist(Pago)} pagos // Lista De Pagos (Cada Pago contiene la cantidad y el usuario que la ha pagado)
      *  
      */
-    constructor(Nombre, Participantes) {
-        this.Nombre = Nombre;
-        this.Participantes = Participantes;
-        this.Pagos = [];
+    constructor(nombre, participantes) {
+        this.nombre = nombre;
+        this.participantes = participantes;
+        this.pagos = [];
     }
 
     addPago(pago){
-        return this.Pagos.push(pago)
+        return this.pagos.push(pago)
     }
 
     gastoPorUsuario(){
