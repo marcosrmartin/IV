@@ -19,7 +19,7 @@ export default class Pago{
                 this.cantidad = 0;
                 throw new Error("Cantidad no puede ser negativa");
             }
-            this.usuarioPaga = usuario_paga;
+            this.usuarioPaga = usuarioPaga;
         }catch(e){
             console.log(e);
         }
