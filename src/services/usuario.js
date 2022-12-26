@@ -19,4 +19,8 @@ export default class Usuario {
             console.log(e);
         }
     }
+    
+    getNombre(){
+        return this.nombre;
+    }
 }
