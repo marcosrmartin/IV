@@ -69,3 +69,33 @@ Tenemos los siguientes candidatos: **npm, yarn, make, grunt, gulp, broccoli**
 *Facilidad de implementar para este proyecto, en el cual no se necesitarán unas órdenes muy complejas, por lo que primaremos que la curva de aprendizaje sea mínima y que sea multiplataforma. Grunt y make no tienen una curva alta, pero aun así es mayor que la del script de yarn/npm.
 
 Nos quedan npm y yarn, así que nos quedaremos con yarn ya que es el gestor de dependencias que utilizamos (ya que no he encontrado comparativas de rendimiento de estos dos sobre scripts).
+
+## Elección del test runner/test framework
+Meto a ambos en el mismo saco ya que la linea entre ambos es muy difusa, ya que se pueden lanzar tests con node sin test runners, se pueden tener test runners con y sin tener que apoyarse en test frameworks de terceros.
+Para ello tendremos en cuenta:
+
+1. Paralelismo.
+2. Facilidad de implementar.
+
+Tendremos en cuentas los siguientes test runners: **Node.js Native Test Runner, jest, mocha, jasmine, ava, tape, tap, QUnit, vitest, storybook**
+
+### 1. Paralelismo
+| Node.js | jest | mocha | jasmine | ava | tape | node-qunit | vitest |
+| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
+| ✔️ | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ | ✔️ |
+Algunos ❌ lo soportan vía plugin, pero aun así están deprecated.
+
+### 2. Fácil de implementar
+1. Node: Viene por defecto con Node y trae librería de aserciones.
+2. Jest y vitest: Testing Framework + librería de aserciones.
+3. Mocha: solamente el testing framework.
+
+Nos quedamos con el test runner de Node.
+
+## Elección de biblioteca de aserciones
+Para ello priorizaremos que siga siendo mantenida y la facilidad de implementación en el proyecto:
+Algunas las librerías: **chai.js, must.js, should.js, expect.js, assert de node.js**
+
+De las cuales solo chai.js sigue siendo mantenida a dia de hoy junto con la librería assert de Node.js que es nueva.
+
+Teniendo en cuenta que en principio no necesitamos ninguna funcionalidad que tenga chai y assert de Node no, nos quedaremos con esta última ya que viene por defecto.

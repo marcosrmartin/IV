@@ -4,27 +4,52 @@
  * gestionado por la Entidad de Eventos
  */
 import Usuario from './usuario.js';
-class Pago{
+export default class Pago{
     /**
-     * 
-     * @param {Float} Cantidad 
-     * @param {Usuario} Usuario_paga
+     * @param {String} nombre // Nombre del Pago 
+     * @param {Float} cantidad 
+     * @param {Usuario} usuarioPaga
+     * @param {Arraylist(Usuario)} participantes
      * @constructor Crea un Pago con comprobación de que el saldo introducido sea positivo. 
      */
-    constructor(Cantidad, Usuario_paga){
+    constructor(nombre, cantidad, usuarioPaga, participantes){
         try{
-            if (Cantidad > 0){
-                this.Cantidad = Cantidad;
+            if (cantidad > 0){
+                this.cantidad = cantidad;
             }else{
-                this.Cantidad = 0;
+                this.cantidad = 0;
                 throw new Error("Cantidad no puede ser negativa");
             }
-            this.Usuario_paga = Usuario_paga;
+            if (nombre.length > 0){
+                this.nombre = nombre;
+            }else{
+                throw new Error ("Nombre no puede ser vacío");
+            }
+            if (participantes.length == 0){
+                throw new Error ("Debe haber al menos un participante.");
+            }else{
+                this.participantes = participantes.slice();
+            }
+            this.usuarioPaga = usuarioPaga;
         }catch(e){
             console.log(e);
         }
      
     }
     
+    getCantidad(){
+        return this.cantidad;
+    }
+
+    getUsuarioPaga(){
+        return this.usuarioPaga;
+    }
+
+    getParticipantes(){
+        return this.participantes;
+    }
+
+    getNombre(){
+        return this.nombre;
+    }
 }
-module.exports.Pago = Pago;

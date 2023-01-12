@@ -3,15 +3,15 @@
  * Clase Usuario, se va a implementar en un inicio como un objeto-valor ya que el usuario una vez creado 
  * permanecerá inmutable hasta que lo queramos eliminar y será gestionado por la Entidad de Eventos
  */
-class Usuario {
+export default class Usuario {
     /**
      * 
-     * @param {String} Nombre 
+     * @param {String} nombre 
      */
-    constructor(Nombre) {
+    constructor(nombre) {
         try{
-            if (Nombre.length() > 0){
-                this.Nombre = Nombre;
+            if (nombre.length > 0){
+                this.nombre = nombre;
             }else{
                 throw new Error ("Nombre no puede ser vacío");
             }
@@ -19,5 +19,8 @@ class Usuario {
             console.log(e);
         }
     }
+    
+    getNombre(){
+        return this.nombre;
+    }
 }
-module.exports.Usuario = Usuario;

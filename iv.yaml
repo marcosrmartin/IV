@@ -7,3 +7,5 @@ automatizar:
   fichero: package.json
   orden: yarn run
   
+test: 
+  - src/tests/evento.test.js
