@@ -99,3 +99,45 @@ Algunas las librerías: **chai.js, must.js, should.js, expect.js, assert de node
 De las cuales solo chai.js sigue siendo mantenida a dia de hoy junto con la librería assert de Node.js que es nueva.
 
 Teniendo en cuenta que en principio no necesitamos ninguna funcionalidad que tenga chai y assert de Node no, nos quedaremos con esta última ya que viene por defecto.
+
+## Elección de contenedor base
+Inicialmente tendremos en cuenta aquellas imágenes que sean imágenes oficiales de Docker o que tengan un editor oficial (para que estas tengan soporte de alguna entidad/persona que implementen mejoras o arreglen bugs), además de ser imágenes específicas para NodeJS (para aquellas imágenes de un SO sin ningún extra que ya viene soportado por una imagen de Node). Buscaremos imágenes para la versión 18 de Node, ya que es la LTS actual y la mínima que necesitamos para nuestras dependencias (tests). Las opciones que he tenido en cuenta son: **node:18.13-alpine3.17, node:18.13.0-bullseye (debian 11), node:18-bullseye-slim,  node:18.13.0-buster (debian 10),node:18.13.0-buster-slim, bitnami/node:18.13.0, distroless Node18, phusion/baseimage:jammy-1.0.1, busybox:musl**
+
+A partir de aquí utilizaré el nombre de la imagen sin su número de versión ni la de Node. 
+
+### 1. Peso descarga imagen base (linux/amd64)
+| alpine | bullseye | bullseye slim | buster | buster slim | bitnami | distroless | baseimage | busybox |
+| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
+| 50.21 MB | 352.69 MB | 75.97 MB | 352.69 MB | 71.85 MB | 239.76 MB | 49.3 MB | 80.5 MB | 760.43 KB |
+
+De aquí descartaremos bullseye, buster y bitnami ya que son imágenes bastante grandes comparadas con el resto.
+
+
+### 2. Peso imagen montada
+Para esta comparativa montaremos la imagen con los archivos necesarios para la puesta en funcionamiento de Node  [(dockerfiles aquí)](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/imagenes.md)
+| alpine | bullseye slim | buster slim | distroless | baseimage | busybox |
+| -- | -- | -- | -- | -- | -- |
+| 177,37 MB | 248,95 MB | 237,57 MB | 166,12 MB ⚠️ | 396,41 MB | ⚠️ |
+
+En este punto nos hemos encontrado con varios problemas:
+- Distroless: la más ligera, pero no nos permite introducir ningún comando ni recibir ningún feedback del contenedor al no tener shell (no es lo que buscamos).
+- Busybox: pensaba que iba a ser fácil de configurar (me equivocaba), la curva de aprendizaje es muy elevada para conseguir 4 MB de ventaja vs otra imagen como Alpine que está basada en esta.
+
+De aquí descartaremos distroless, busybox y baseimage por su peso (otro problema que he encontrado es que no permite cambiar el usuario durante la construcción de su imagen debido a que utiliza un CMD con un script y da [error](https://github.com/phusion/baseimage-docker/issues/617) por permisos, aunque si hacemos los tests con ENTRYPOINT funcionará ya que lo realiza antes).
+
+
+### 3. Uso de memoria (reposo)
+| alpine | bullseye slim | buster slim |
+| -- | -- | -- |
+| 14.9 MB | 14.3 MB | 15.5 MB |
+
+Donde apenas hay diferencia entre ellas.
+
+### 4. Seguridad (SnykAdvisor)
+| alpine | bullseye slim | buster slim |
+| -- | -- | -- |
+| 0 | 43L | 2H 54L |
+
+Donde Alpine es la única que no tiene CVEs descubiertos ahora mismo.
+
+Basandonos en los criterios vistos anteriormente nos quedaremos con Alpine al ser la más ligera de las tres y tener menos vulnerabilidades.
