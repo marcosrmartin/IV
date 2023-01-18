@@ -101,35 +101,42 @@ De las cuales solo chai.js sigue siendo mantenida a dia de hoy junto con la libr
 Teniendo en cuenta que en principio no necesitamos ninguna funcionalidad que tenga chai y assert de Node no, nos quedaremos con esta última ya que viene por defecto.
 
 ## Elección de contenedor base
-Inicialmente tendremos en cuenta aquellas imágenes que sean imágenes oficiales de Docker o que tengan un editor oficial (para que estas tengan soporte de alguna entidad/persona que implementen mejoras o arreglen bugs), además de ser imágenes específicas para NodeJS (para aquellas imágenes de un SO sin ningún extra que ya viene soportado por una imagen de Node). Buscaremos imágenes para la versión 18 de Node, ya que es la LTS actual y la mínima que necesitamos para nuestras dependencias (tests). Las opciones que he tenido en cuenta son: **node:18.13-alpine3.17, node:18.13.0-bullseye (debian 11), node:18-bullseye-slim,  node:18.13.0-buster (debian 10),node:18.13.0-buster-slim, bitnami/node:18.13.0, distroless Node18, phusion/baseimage:jammy-1.0.1, busybox:musl**
+Los criteros para elegir la imagen serán:
+1º Si es especifica para Node que sea oficiales de docker o editor oficial (para que estas tengan soporte de alguna entidad/persona que implementen mejoras o arreglen bugs) y que soporte la última versión (19.4.0 actualmente).
+2º Si no es específico para Node, que no tenga una imágen para este, por ejemplo, no tendré en cuenta buster si existe node:buster pero sí baseimage ya que no existe node:baseimage.
+3º Deberán ser latest.
+4º Que tengan shell (No distroless). 
+
+Las opciones que he tenido en cuenta son:
+**node:alpine, node:current-bullseye (debian 11), node:current-bullseye-slim, node:current-buster (debian 10), node:current-buster-slim, bitnami/node:latest, phusion/baseimage:jammy-1.0.1**.
+
 
 A partir de aquí utilizaré el nombre de la imagen sin su número de versión ni la de Node. 
 
 ### 1. Peso descarga imagen base (linux/amd64)
-| alpine | bullseye | bullseye slim | buster | buster slim | bitnami | distroless | baseimage | busybox |
-| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
-| 50.21 MB | 352.69 MB | 75.97 MB | 352.69 MB | 71.85 MB | 239.76 MB | 49.3 MB | 80.5 MB | 760.43 KB |
+| alpine | bullseye | bullseye slim | buster | buster slim | bitnami  | baseimage | busybox |
+| -- | -- | -- | -- | -- | -- | -- | -- | -- |
+| 51.29 MB | 353.67 MB | 76.96 MB | 343.75 MB | 72.86 MB | 239.75 MB | 80.5 MB | 760.43 KB |
 
 De aquí descartaremos bullseye, buster y bitnami ya que son imágenes bastante grandes comparadas con el resto.
 
 
 ### 2. Peso imagen montada
 Para esta comparativa montaremos la imagen con los archivos necesarios para la puesta en funcionamiento de Node  [(dockerfiles aquí)](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/imagenes.md)
-| alpine | bullseye slim | buster slim | distroless | baseimage | busybox |
-| -- | -- | -- | -- | -- | -- |
-| 177,37 MB | 248,95 MB | 237,57 MB | 166,12 MB ⚠️ | 396,41 MB | ⚠️ |
+| alpine | bullseye slim | buster slim | baseimage | busybox |
+| -- | -- | -- | -- | -- |
+| 178.93 MB | 250.65 MB | 239.27 MB | 399.9 MB | ⚠️ |
 
-En este punto nos hemos encontrado con varios problemas:
-- Distroless: la más ligera, pero no nos permite introducir ningún comando ni recibir ningún feedback del contenedor al no tener shell (no es lo que buscamos).
+En este punto nos hemos encontrado con un problema:
 - Busybox: pensaba que iba a ser fácil de configurar (me equivocaba), la curva de aprendizaje es muy elevada para conseguir 4 MB de ventaja vs otra imagen como Alpine que está basada en esta.
 
-De aquí descartaremos distroless, busybox y baseimage por su peso (otro problema que he encontrado es que no permite cambiar el usuario durante la construcción de su imagen debido a que utiliza un CMD con un script y da [error](https://github.com/phusion/baseimage-docker/issues/617) por permisos, aunque si hacemos los tests con ENTRYPOINT funcionará ya que lo realiza antes).
+De aquí descartaremos busybox (por lo mencionado anteriormente) y baseimage por su peso (otro problema que he encontrado es que no permite cambiar el usuario durante la construcción de su imagen debido a que utiliza un CMD con un script y da [error](https://github.com/phusion/baseimage-docker/issues/617) por permisos, aunque si hacemos los tests con ENTRYPOINT funcionará ya que lo realiza antes).
 
 
 ### 3. Uso de memoria (reposo)
 | alpine | bullseye slim | buster slim |
 | -- | -- | -- |
-| 14.9 MB | 14.3 MB | 15.5 MB |
+| 12.3 MB | 13.5 MB | 13.4 MB |
 
 Donde apenas hay diferencia entre ellas.
 
