@@ -1,9 +1,10 @@
-FROM node:18.13-alpine3.17
-WORKDIR /home/node/
+FROM node:alpine
+WORKDIR /app
 
-USER node
-COPY --chown=node:node . .
-
+COPY package.json .
 RUN yarn setup
+
+WORKDIR /app/test
+USER node
 
 ENTRYPOINT [ "yarn", "test" ]
