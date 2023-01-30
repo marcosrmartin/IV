@@ -102,49 +102,51 @@ Teniendo en cuenta que en principio no necesitamos ninguna funcionalidad que ten
 
 ## Elección de contenedor base
 Los criteros para elegir la imagen serán:
-1º Si es especifica para Node que sea oficiales de docker o editor oficial (para que estas tengan soporte de alguna entidad/persona que implementen mejoras o arreglen bugs) y que soporte la última versión (19.4.0 actualmente).
-2º Si no es específico para Node, que no tenga una imágen para este, por ejemplo, no tendré en cuenta buster si existe node:buster pero sí baseimage ya que no existe node:baseimage.
-3º Deberán ser latest.
-4º Que tengan shell (No distroless). 
+1º Si es especifica para Node que sea oficiales de docker, editor oficial o sponsored oss (para que estas tengan soporte de alguna entidad/persona que implementen mejoras o arreglen bugs).
+2º Que soporte la última versión de Node (Por ejemplo PhotonOS y Clearlinux tienen para anteriores, pero para esta todavía no).
+3º Si no es específico para Node, que no tenga una imágen para este (por ejemplo, no tendré en cuenta buster si existe node:buster pero sí baseimage ya que no existe node:baseimage) y sea un SO limpio, que no sea específico para otra función (como Okteto o Antrea).
+4º Que no haya que montarlo con ficheros estáticos (busybox) o una herramienta externa (por ejemplo chisel o las distroless de Google las cuales hay que crearlas con Bazel, para añadir Node y Yarn) y en caso de no tener gestor de paquetes que se pueda montar con un dockerfile multi-stage desde otra imagen con el mismo flavor. 
 
 Las opciones que he tenido en cuenta son:
-**node:alpine, node:current-bullseye (debian 11), node:current-bullseye-slim, node:current-buster (debian 10), node:current-buster-slim, bitnami/node:latest, phusion/baseimage:jammy-1.0.1**.
+**node:alpine, node:current-bullseye (debian 11), node:current-bullseye-slim, node:current-buster (debian 10), node:current-buster-slim, bitnami/node:latest, phusion/baseimage:jammy-1.0.1, almalinux:9, almalinux:9-minimal, ubuntu:kinetic, fedora:36**.
 
 
 A partir de aquí utilizaré el nombre de la imagen sin su número de versión ni la de Node. 
 
 ### 1. Peso descarga imagen base (linux/amd64)
-| alpine | bullseye | bullseye slim | buster | buster slim | bitnami  | baseimage | busybox |
-| -- | -- | -- | -- | -- | -- | -- | -- | -- |
-| 51.29 MB | 353.67 MB | 76.96 MB | 343.75 MB | 72.86 MB | 239.75 MB | 80.5 MB | 760.43 KB |
+| alpine | bullseye | bullseye slim | buster | buster slim | bitnami | baseimage | almalinux | almalinux minimal | ubuntu | fedora |
+| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
+| 51.28 MB | 353.67 MB | 76.95 MB | 343.75 MB | 72.85 MB | 239.32 MB | 80.5 MB | 66.19 MB | 31.91 MB | 26.21 MB | 57.25 MB |
 
 De aquí descartaremos bullseye, buster y bitnami ya que son imágenes bastante grandes comparadas con el resto.
 
 
 ### 2. Peso imagen montada
-Para esta comparativa montaremos la imagen con los archivos necesarios para la puesta en funcionamiento de Node  [(dockerfiles aquí)](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/imagenes.md)
-| alpine | bullseye slim | buster slim | baseimage | busybox |
-| -- | -- | -- | -- | -- |
-| 178.93 MB | 250.65 MB | 239.27 MB | 399.9 MB | ⚠️ |
+Para esta comparativa montaremos la imagen con los archivos necesarios para la puesta en funcionamiento de Node [(dockerfiles aquí)](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/dockerfiles), utilizaremos la versión classic de Yarn, ya que para lanzar scripts no hay diferencia con respecto a la 3.x y utilizamos menos ficheros (los ficheros .yarnrc.yml y el directorio .yarn son necesarios para utilizar la versión 3.x).
+| alpine | bullseye slim | buster slim | baseimage | almalinux | almalinux minimal | ubuntu | fedora |
+| -- | -- | -- | -- | -- | -- | -- | -- |
+| 176.07 MB | 247.79 MB | 236.41 MB | 327.45 MB | 297.58 MB | 184.88 MB | 169.11 MB | 263.91 MB |
 
-En este punto nos hemos encontrado con un problema:
-- Busybox: pensaba que iba a ser fácil de configurar (me equivocaba), la curva de aprendizaje es muy elevada para conseguir 4 MB de ventaja vs otra imagen como Alpine que está basada en esta.
+De aquí descartaremos baseimage, almalinux y fedora por su peso (otro problema que he encontrado en baseimage es que no permite cambiar el usuario durante la construcción de su imagen debido a que utiliza un CMD con un script y da [error](https://github.com/phusion/baseimage-docker/issues/617) por permisos, aunque si hacemos los tests con ENTRYPOINT funcionará ya que lo realiza antes).
 
-De aquí descartaremos busybox (por lo mencionado anteriormente) y baseimage por su peso (otro problema que he encontrado es que no permite cambiar el usuario durante la construcción de su imagen debido a que utiliza un CMD con un script y da [error](https://github.com/phusion/baseimage-docker/issues/617) por permisos, aunque si hacemos los tests con ENTRYPOINT funcionará ya que lo realiza antes).
+Destacan almalinux minimal, ubuntu y alpine.
 
 
 ### 3. Uso de memoria (reposo)
-| alpine | bullseye slim | buster slim |
-| -- | -- | -- |
-| 12.3 MB | 13.5 MB | 13.4 MB |
+| alpine | bullseye slim | buster slim | almalinux minimal | ubuntu | 
+| -- | -- | -- | -- | -- |
+| 12.46MiB | 13.68MiB | 13.5MiB | 1.562MiB | 1.805MiB |
 
-Donde apenas hay diferencia entre ellas.
+Donde destacan almalinux minimal y ubuntu (Aprox. 8 y 7 veces menos uso de memoria que alpine).
 
-### 4. Seguridad (SnykAdvisor)
-| alpine | bullseye slim | buster slim |
+
+### 4. Seguridad (docker scan Snyk)
+| alpine | bullseye slim | buster slim | almalinux minimal | ubuntu | 
 | -- | -- | -- |
-| 0 | 43L | 2H 54L |
+| 0 | 42L | 1C 2H 1M 53L | ⚠️ | 1M 6L |
 
 Donde Alpine es la única que no tiene CVEs descubiertos ahora mismo.
 
-Basandonos en los criterios vistos anteriormente nos quedaremos con Alpine al ser la más ligera de las tres y tener menos vulnerabilidades.
+Para almalinux minimal todavia no hay información sobre vulnerabilidades disponible, aunque la última actualización de seguridad para la v9 fue el 27 de enero y la mayoría de ellas ni siquiera afectan a la versión minimal (por lo que no debería de haber nada crítico).
+
+Basándonos en todos los criterios anteriores, nos quedaremos con Ubuntu Kinetic, ya que es el más ligero de todos, el segundo con mejor uso de memoria y sin tener ningún fallo de seguridad grave.
