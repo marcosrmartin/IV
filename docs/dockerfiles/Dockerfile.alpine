@@ -1,0 +1,6 @@
+FROM node:alpine
+WORKDIR /app/test
+
+USER node
+
+# ENTRYPOINT [ "yarn", "test" ]

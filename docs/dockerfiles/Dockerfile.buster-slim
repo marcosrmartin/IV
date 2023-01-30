@@ -1,0 +1,6 @@
+FROM node:buster-slim
+WORKDIR /app/test
+
+USER node
+
+# ENTRYPOINT [ "yarn", "test" ]

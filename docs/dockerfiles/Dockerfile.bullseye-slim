@@ -1,0 +1,6 @@
+FROM node:bullseye-slim
+WORKDIR /app/test
+
+USER node
+
+# ENTRYPOINT [ "yarn", "test" ]
