@@ -1,0 +1,32 @@
+FROM almalinux:9 AS BUILD
+ENV YARN_VERSION=1.22.19
+
+RUN curl -sL https://rpm.nodesource.com/setup_19.x | bash - \
+    && dnf install nodejs -y \
+    && groupadd --gid 1000 node \
+    && useradd --uid 1000 --gid node node \
+    && npm uninstall -g npm \
+    && rm -rf $(find / | grep npm) \
+    $(find / | grep node_modules) \
+    && curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
+    && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
+    && rm -rf /var/cache/* /tmp/* /usr/share/doc/node* yarn-v$YARN_VERSION.tar.gz
+    
+FROM almalinux:9-minimal
+WORKDIR /app/test   
+ENV YARN_VERSION=1.22.19
+
+COPY --from=build /opt/yarn-v$YARN_VERSION/ /opt/yarn-v$YARN_VERSION/
+COPY --from=build /etc/passwd /etc/shadow /etc/group /etc/
+
+RUN ln -snf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
+    && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
+    && mkdir /home/node \
+    && chown node /home/node \
+    && chgrp node /home/node 
+
+COPY --from=build /usr/bin/node /usr/bin/node
+
+USER node
+
+# ENTRYPOINT [ "yarn", "test" ]
