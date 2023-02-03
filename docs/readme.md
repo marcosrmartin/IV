@@ -102,10 +102,10 @@ Teniendo en cuenta que en principio no necesitamos ninguna funcionalidad que ten
 
 ## Elección de contenedor base
 Los criteros para elegir la imagen serán:
-1º Si es especifica para Node que sea oficiales de docker, editor oficial o sponsored oss (para que estas tengan soporte de alguna entidad/persona que implementen mejoras o arreglen bugs).
-2º Que soporte la última versión de Node (Por ejemplo PhotonOS y Clearlinux tienen para anteriores, pero para esta todavía no).
-3º Si no es específico para Node, que no tenga una imágen para este (por ejemplo, no tendré en cuenta buster si existe node:buster pero sí baseimage ya que no existe node:baseimage) y sea un SO limpio, que no sea específico para otra función (como Okteto o Antrea).
-4º Que no haya que montarlo con ficheros estáticos (busybox) o una herramienta externa (por ejemplo chisel o las distroless de Google las cuales hay que crearlas con Bazel, para añadir Node y Yarn) y en caso de no tener gestor de paquetes que se pueda montar con un dockerfile multi-stage desde otra imagen con el mismo flavor. 
+1. Si es especifica para Node que sea oficiales de docker, editor oficial o sponsored oss (para que estas tengan soporte de alguna entidad/persona que implementen mejoras o arreglen bugs).
+2. Que soporte la última versión de Node (Por ejemplo PhotonOS y Clearlinux tienen para anteriores, pero para esta todavía no).
+3. Si no es específico para Node, que no tenga una imágen para este (por ejemplo, no tendré en cuenta buster si existe node:buster pero sí baseimage ya que no existe node:baseimage) y sea un SO limpio, que no sea específico para otra función (como Okteto o Antrea).
+4. Que no haya que montarlo con ficheros estáticos (busybox) o una herramienta externa (por ejemplo chisel o las distroless de Google las cuales hay que crearlas con Bazel, para añadir Node y Yarn) y en caso de no tener gestor de paquetes que se pueda montar con un dockerfile multi-stage desde otra imagen con el mismo flavor. 
 
 Las opciones que he tenido en cuenta son:
 **node:alpine, node:current-bullseye (debian 11), node:current-bullseye-slim, node:current-buster (debian 10), node:current-buster-slim, bitnami/node:latest, phusion/baseimage:jammy-1.0.1, almalinux:9, almalinux:9-minimal, ubuntu:kinetic, fedora:36**.
@@ -122,7 +122,8 @@ De aquí descartaremos bullseye, buster y bitnami ya que son imágenes bastante 
 
 
 ### 2. Peso imagen montada
-Para esta comparativa montaremos la imagen con los archivos necesarios para la puesta en funcionamiento de Node [(dockerfiles aquí)](https://github.com/marcosrmartin/PerroAndaluz/tree/Objetivo-0/docs/dockerfiles), utilizaremos la versión classic de Yarn, ya que para lanzar scripts no hay diferencia con respecto a la 3.x y utilizamos menos ficheros (los ficheros .yarnrc.yml y el directorio .yarn son necesarios para utilizar la versión 3.x).
+Para esta comparativa montaremos la imagen con los archivos necesarios para la puesta en funcionamiento de Node, para ello utilizaremos diferentes [dockerfiles](https://github.com/marcosrmartin/PerroAndaluz/tree/master/docs/dockerfiles) y un [script](https://github.com/marcosrmartin/PerroAndaluz/blob/master/docs/comparativa.bat) para llevarla a cabo. 
+Utilizaremos la versión classic de Yarn, ya que para lanzar scripts no hay diferencia con respecto a la 3.x y utilizamos menos ficheros (los ficheros .yarnrc.yml y el directorio .yarn son necesarios para utilizar la versión 3.x).
 | alpine | bullseye slim | buster slim | baseimage | almalinux | almalinux minimal | ubuntu | fedora |
 | -- | -- | -- | -- | -- | -- | -- | -- |
 | 176.07 MB | 247.79 MB | 236.41 MB | 327.45 MB | 297.58 MB | 184.88 MB | 169.11 MB | 263.91 MB |
