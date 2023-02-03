@@ -14,27 +14,22 @@ export default class Pago{
      */
     constructor(nombre, cantidad, usuarioPaga, participantes){
         try{
-            if (cantidad > 0){
-                this.cantidad = cantidad;
-            }else{
-                this.cantidad = 0;
-                throw new Error("Cantidad no puede ser negativa");
+            if (cantidad <= 0){
+                throw new Error("La cantidad tiene que ser mayor que 0.");
             }
-            if (nombre.length > 0){
-                this.nombre = nombre;
-            }else{
+            this.cantidad = cantidad;
+            if (nombre.length === 0){
                 throw new Error ("Nombre no puede ser vacío");
             }
-            if (participantes.length == 0){
+            this.nombre = nombre;
+            if (participantes.length === 0){
                 throw new Error ("Debe haber al menos un participante.");
-            }else{
-                this.participantes = participantes.slice();
             }
+            this.participantes = participantes.slice();
             this.usuarioPaga = usuarioPaga;
         }catch(e){
             console.log(e);
         }
-     
     }
     
     getCantidad(){
