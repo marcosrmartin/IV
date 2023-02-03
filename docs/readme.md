@@ -143,7 +143,7 @@ Donde destacan almalinux minimal y ubuntu (Aprox. 8 y 7 veces menos uso de memor
 
 ### 4. Seguridad (docker scan Snyk)
 | alpine | bullseye slim | buster slim | almalinux minimal | ubuntu | 
-| -- | -- | -- |
+| -- | -- | -- | -- | -- |
 | 0 | 42L | 1C 2H 1M 53L | ⚠️ | 1M 6L |
 
 Donde Alpine es la única que no tiene CVEs descubiertos ahora mismo.
